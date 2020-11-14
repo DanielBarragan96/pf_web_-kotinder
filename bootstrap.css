@@ -1,0 +1,169 @@
+/* Botones Morados */
+.btn-light{
+    background-color: blueviolet;
+    color: white;
+    border: 0pt;
+}
+.btn-light:hover{
+    background-color: rgb(107, 26, 182);
+    color: white;
+}
+/*Barra de navegación*/
+#IDnavbar{
+    background: rgba(129,11,145,1);
+    background: -moz-linear-gradient(left, rgba(129,11,145,1) 0%, rgba(255,94,148,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(129,11,145,1)), color-stop(100%, rgba(255,94,148,1)));
+    background: -webkit-linear-gradient(left, rgba(129,11,145,1) 0%, rgba(255,94,148,1) 100%);
+    background: -o-linear-gradient(left, rgba(129,11,145,1) 0%, rgba(255,94,148,1) 100%);
+    background: -ms-linear-gradient(left, rgba(129,11,145,1) 0%, rgba(255,94,148,1) 100%);
+    background: linear-gradient(to right, rgba(129,11,145,1) 0%, rgba(255,94,148,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#810b91', endColorstr='#ff5e94', GradientType=1 );
+}
+/* Carta mascota principal */
+.card{
+    margin:auto;
+    height:auto;
+    width: 300px;
+    margin-top: 1%;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.carousel-inner {
+    border-radius:25px;
+}
+/* Botones Likes */
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+.botones_likes{
+    padding-top: 10px;
+    margin: auto;
+    width: 300px;
+}
+.btn_like{
+    background: rgba(94,255,113,1);
+    background: -moz-linear-gradient(-45deg, rgba(94,255,113,1) 0%, rgba(77,222,145,1) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(94,255,113,1)), color-stop(100%, rgba(77,222,145,1)));
+    background: -webkit-linear-gradient(-45deg, rgba(94,255,113,1) 0%, rgba(77,222,145,1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(94,255,113,1) 0%, rgba(77,222,145,1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(94,255,113,1) 0%, rgba(77,222,145,1) 100%);
+    background: linear-gradient(135deg, rgba(94,255,113,1) 0%, rgba(77,222,145,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5eff71', endColorstr='#4dde91', GradientType=1 );
+    border: 0pt;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 3%;
+}
+.btn_superlike{
+    background: rgba(94,255,234,1);
+    background: -moz-linear-gradient(-45deg, rgba(94,255,234,1) 0%, rgba(78,178,224,1) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(94,255,234,1)), color-stop(100%, rgba(78,178,224,1)));
+    background: -webkit-linear-gradient(-45deg, rgba(94,255,234,1) 0%, rgba(78,178,224,1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(94,255,234,1) 0%, rgba(78,178,224,1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(94,255,234,1) 0%, rgba(78,178,224,1) 100%);
+    background: linear-gradient(135deg, rgba(94,255,234,1) 0%, rgba(78,178,224,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5effea', endColorstr='#4eb2e0', GradientType=1 ); ;
+    border: 0pt;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 3%;
+}
+.btn_dislike{
+    background: rgba(224,13,41,1);
+    background: -moz-linear-gradient(-45deg, rgba(224,13,41,1) 0%, rgba(240,24,128,1) 100%);
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(224,13,41,1)), color-stop(100%, rgba(240,24,128,1)));
+    background: -webkit-linear-gradient(-45deg, rgba(224,13,41,1) 0%, rgba(240,24,128,1) 100%);
+    background: -o-linear-gradient(-45deg, rgba(224,13,41,1) 0%, rgba(240,24,128,1) 100%);
+    background: -ms-linear-gradient(-45deg, rgba(224,13,41,1) 0%, rgba(240,24,128,1) 100%);
+    background: linear-gradient(135deg, rgba(224,13,41,1) 0%, rgba(240,24,128,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e00d29', endColorstr='#f01880', GradientType=1 );
+    border: 0pt;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 3%;
+}
+.tabla_principal{
+    width: 98%;
+    margin: 1%;
+}
+.tabla_favoritos{
+    align-content: center;
+    margin: auto;
+    width: 100%;
+}
+.tabla_favoritos tr td{
+    width:300px;
+    height: 300px;
+}
+/* .modal-body{
+    padding: 0pt;
+} */
+/* .modal-content{
+    margin-left: 100px;
+    border-radius: 25px;
+    border: 0px;
+    width:300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+} */
+.card_fav{
+    margin:auto;
+    height:auto;
+    width: 300px;
+    border-radius: 25px;
+}
+.columna_perfil{
+    width: 30%;
+}
+.carta_perfil{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.imagen_perfil{
+    margin-left: 25px;
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+    border: 4px solid lightgray;
+}
+.columna_mascotas{
+    width: 50%;
+}
+#btn_plus{
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    font-size: w3-xxxlarge;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tabla_titulos p{
+    font-size: 30px;
+}
+
+.form_nombre{
+    size: 12pt;
+    border: clear;
+}
+
+.btn_fav{
+    border: none;
+    background-color: white;
+}
+
+/* .carousel-item{
+    max-height:100%;
+    max-width:100%;
+} */
