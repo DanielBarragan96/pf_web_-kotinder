@@ -13,15 +13,16 @@ app.use(express.urlencoded({
 }))
 const usersRouter = require('./routes/usersRoutes');
 const UsersController = require('./controllers/usersController');
+const Secrets = require('./secrets');
+let secrets = new Secrets();
 const PORT = process.env.PORT || 3000;
-const SECRET_JWT = 'I3s@2020';
 
 async function authentication(req, res, next) {
     let xauth = req.get('x-auth-user');
     // console.log(xauth);
     if (xauth && xauth.split('.').length > 1) {
         try {
-            let token = jwt.verify(xauth, SECRET_JWT);
+            let token = jwt.verify(xauth, secrets.getSecret());
             let id = token.uid;
             let userctrl = new UsersController();
             let user = await userctrl.getUser(id);
@@ -51,7 +52,7 @@ app.post('/api/login', async (req, res) => {
             // let token = randomize('Aa0','10')+"-"+user.uid;
             let token = jwt.sign({
                 "uid": user._id
-            }, SECRET_JWT);
+            }, secrets.getSecret());
             user.token = token;
             // console.log(user);
             let uuser = await uctrl.updateUser(user);
