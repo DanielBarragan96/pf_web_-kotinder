@@ -70,8 +70,8 @@ class UsersController {
         let addedEntry = await USERS_DB_CLOUDANT.insert(updatee);
         console.log(addedEntry);
         if (addedEntry.ok) {
-            user._rev = addedEntry._rev;
-            user._uid = addedEntry._id;
+            user._rev = addedEntry.rev;
+            user._id = addedEntry.id;
             return user;
         } else {
             return false;
