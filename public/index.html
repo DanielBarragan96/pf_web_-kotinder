@@ -92,7 +92,7 @@
       </div>
     </div>
 
-    <!-- Modal 1 Login -->
+    <!-- Modal Login -->
     <div
       class="modal fade"
       id="modelLogin"
@@ -126,7 +126,7 @@
                 <input
                   type="email"
                   name="Correo"
-                  id="Correo1"
+                  id="userInputLogin"
                   class="form-control"
                   placeholder="Correo Registrado"
                   aria-describedby="helpId"
@@ -144,14 +144,19 @@
                 <input
                   type="password"
                   name="Contraseña"
-                  id="Contra1"
+                  id="passwordInputLogin"
                   class="form-control"
                   placeholder="Contraseña Registrada"
                   aria-describedby="helpId"
                 />
               </div>
             </div>
-            <button type="button" class="btn btn-light" data-dismiss="modal">
+            <button
+              type="button"
+              class="btn btn-light"
+              data-dismiss="modal"
+              id="loginBtn"
+            >
               Login
             </button>
             <button
@@ -177,7 +182,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Register -->
     <div
       class="modal fade"
       id="modalRegister"

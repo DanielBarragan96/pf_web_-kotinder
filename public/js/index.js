@@ -68,12 +68,12 @@ function login() {
         email: email,
         password: pass
     }), HTTTPMethods.post, (res) => {
-        let token = res.data.substring(10, 26);
-        console.log(token);
+        let token = JSON.parse(res.data).token;
+        // console.log(token);
         setCookie('token', token, 2);
-        document.getElementById('loginResponseMSG').innerHTML = '<div class="text-success">Bienvenido</div>';
+        // document.getElementById('loginResponseMSG').innerHTML = '<div class="text-success">Bienvenido</div>';
     }, (error) => {
-        document.getElementById('loginResponseMSG').innerHTML = '<div class="text-danger">' + error + '</div>';
+        // document.getElementById('loginResponseMSG').innerHTML = '<div class="text-danger">' + error + '</div>';
     })
 }
 
