@@ -32,6 +32,11 @@
     <!--CSS-->
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="bootstrap.css" />
+    <style>
+      input:invalid {
+        border-color: red;
+      }
+    </style>
   </head>
   <body style="background-color: rgb(25, 6, 48)">
     <!-- Carrusel de fotos de fondo -->
@@ -72,7 +77,7 @@
           type="button"
           class="btn btn-light"
           data-toggle="modal"
-          data-target="#model2"
+          data-target="#modalRegister"
         >
           Registrate
         </button>
@@ -80,7 +85,7 @@
           type="button"
           class="btn btn-light"
           data-toggle="modal"
-          data-target="#model1"
+          data-target="#modelLogin"
         >
           Inicia Sesión
         </button>
@@ -90,7 +95,7 @@
     <!-- Modal 1 Login -->
     <div
       class="modal fade"
-      id="model1"
+      id="modelLogin"
       tabindex="-1"
       role="dialog"
       aria-labelledby="modelTitleId"
@@ -162,7 +167,7 @@
               <a
                 href="#"
                 data-toggle="modal"
-                data-target="#model2"
+                data-target="#modalRegister"
                 data-dismiss="modal"
                 >Registrate aquí</a
               >
@@ -172,19 +177,19 @@
       </div>
     </div>
 
-    <!-- Modal 2 Registro-->
+    <!-- Modal -->
     <div
       class="modal fade"
-      id="model2"
+      id="modalRegister"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="modelTitleId"
+      aria-labelledby="createFormModal"
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Registrar Usuario</h5>
+            <h5 class="modal-title" id="createFormModal">Modal title</h5>
             <button
               type="button"
               class="close"
@@ -195,61 +200,122 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group">
+            <div id="createUserForm">
+              <div class="row">
+                <div class="col-6">
                   <input
                     type="text"
+                    name="nombre"
+                    id="registerNombre"
                     class="form-control"
-                    name="Nombre"
-                    id="Nombre"
-                    aria-describedby="helpId"
                     placeholder="Nombre o nombres"
+                    aria-describedby="helpId"
+                    required
                   />
                 </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group">
+                <div class="col-6">
                   <input
                     type="text"
+                    name="apellidos"
+                    id="registerApellidos"
                     class="form-control"
-                    name="Apellido"
-                    id="Apellido"
-                    aria-describedby="helpId"
                     placeholder="Apellidos"
+                    aria-describedby="helpId"
+                    required
                   />
                 </div>
               </div>
-            </div>
-            <div class="form-group">
               <input
                 type="email"
-                class="form-control"
                 name="email"
-                id="email"
+                id="registerEmail"
+                class="form-control mt-3"
+                placeholder="Correo"
                 aria-describedby="helpId"
-                placeholder="Tu email"
+                required
               />
-            </div>
-            <div class="form-group">
               <input
                 type="password"
-                class="form-control"
-                name="password"
-                id="password"
-                aria-describedby="helpId"
+                name="password1"
+                id="password1"
+                class="form-control mt-3"
                 placeholder="Contraseña"
+                aria-describedby="helpId"
+                required
               />
-            </div>
-            <div>
-              <button type="button" class="btn btn-light">Registrarse</button>
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
+              <input
+                type="password"
+                name="password2"
+                id="password2"
+                class="form-control mt-3"
+                placeholder="Confirmar contraseña"
+                aria-describedby="helpId"
+                required
+              />
+              <input
+                type="date"
+                class="form-control mt-3"
+                value="2000-01-01"
+                name="fecha"
+                id="registerDate"
+              />
+
+              <div class="radioB mt-3 border">
+                <div class="form-check">
+                  <label class="form-check-label ml-3">
+                    <input
+                      type="radio"
+                      class="form-check-input sexoF"
+                      name="sexo"
+                      id="registerSexoM"
+                      value="M"
+                      checked
+                    />
+                    Mujer
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label ml-3">
+                    <input
+                      type="radio"
+                      class="form-check-input sexoM"
+                      name="sexo"
+                      id="registerSexoH"
+                      value="H"
+                    />
+                    Hombre
+                  </label>
+                </div>
+              </div>
+              <input
+                type="url"
+                name="image"
+                id="registerUrl"
+                class="form-control mt-3"
+                placeholder="Url de imagen de perfil"
+                aria-describedby="helpId"
+              />
+
+              <div id="responseMSG"></div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  id="createUserBtn"
+                  class="btn btn-light"
+                  disabled
+                >
+                  Guardar
+                </button>
+                <br />
+              </div>
             </div>
           </div>
         </div>
@@ -273,5 +339,6 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
