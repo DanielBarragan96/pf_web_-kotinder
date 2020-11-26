@@ -46,12 +46,8 @@ app.use('/api/users', authentication, usersRouter);
 app.post('/api/login', async (req, res) => {
     if (req.body.email && req.body.password) {
         let uctrl = new UsersController();
-        // let pass = bcryp.hash(req.body.password,5);
-        // let user = await uctrl.getUserByCredentials(req.body.email,pass);
         let user = await uctrl.getUserByCredentials(req.body.email, req.body.password);
-        // user.password === pass
         if (user) {
-            // let token = randomize('Aa0','10')+"-"+user.uid;
             let token = jwt.sign({
                 "uid": user._id
             }, secrets.getSecret());
@@ -69,9 +65,6 @@ app.post('/api/login', async (req, res) => {
         res.status(400).send('Missing user/pass');
     }
 });
-// app.get('/', (req, res) => {
-//     res.send('Users app práctica 4');
-// });
 
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`);
