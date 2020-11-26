@@ -20,7 +20,9 @@ const PORT = process.env.PORT || 3000;
 async function authentication(req, res, next) {
     let xauth = req.get('x-auth-user');
     // console.log(xauth);
-    if (xauth && xauth.split('.').length > 1) {
+    if (xauth == 'REGISTER_USER') {
+        next();
+    } else if (xauth && xauth.split('.').length > 1) {
         try {
             let token = jwt.verify(xauth, secrets.getSecret());
             let id = token.uid;

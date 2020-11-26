@@ -69,8 +69,8 @@ function login() {
         password: pass
     }), HTTTPMethods.post, (res) => {
         let token = JSON.parse(res.data).token;
-        // console.log(token);
         setCookie('token', token, 2);
+        // window.open(`${window.location.href}principal.html`, '_self');
         // document.getElementById('loginResponseMSG').innerHTML = '<div class="text-success">Bienvenido</div>';
     }, (error) => {
         // document.getElementById('loginResponseMSG').innerHTML = '<div class="text-danger">' + error + '</div>';
@@ -111,7 +111,7 @@ function createUser() {
     }, (error) => {
         console.log(error);
         alert(`No se pudo registrar, favor de revisar los campos. ${error}`);
-    }, document.cookie.split("=")[1]);
+    }, 'REGISTER_USER');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
