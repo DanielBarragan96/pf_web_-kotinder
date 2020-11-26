@@ -70,7 +70,7 @@ function login() {
     }), HTTTPMethods.post, (res) => {
         let token = JSON.parse(res.data).token;
         setCookie('token', token, 2);
-        // window.open(`${window.location.href}principal.html`, '_self');
+        window.open(`${window.location.href}principal.html`, '_self');
         // document.getElementById('loginResponseMSG').innerHTML = '<div class="text-success">Bienvenido</div>';
     }, (error) => {
         // document.getElementById('loginResponseMSG').innerHTML = '<div class="text-danger">' + error + '</div>';
