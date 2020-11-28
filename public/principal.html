@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <title>+kotinder</title>
+    <script src="./js/tokenCheck.js"></script>
 
     <!--Recursos gráficos-->
     <link
@@ -32,34 +33,6 @@
   </head>
 
   <body class="pantalla_principal">
-    <script>
-      function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(";");
-        for (var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == " ") {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
-        }
-        return "";
-      }
-
-      let token = getCookie("token");
-      if (token.length > 0) {
-        console.log(token);
-      } else {
-        window.open(
-          `${window.location.href.split("principal.html")[0]}`,
-          "_self"
-        );
-      }
-    </script>
-
     <!-- Barra de navegación -->
     <nav id="IDnavbar" class="navbar navbar-expand-sm navbar-dark">
       <a class="navbar-brand" href="principal.html">
