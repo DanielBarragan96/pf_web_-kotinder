@@ -113,4 +113,22 @@ router.delete('/:email', async (req, res) => {
         res.status(400).send('missing arguments');
     }
 });
+
+router.get('/token/:token', async (req, res) => {
+    let userCtrl = new UsersController();
+
+    console.log(req.params.token);
+    if (req.params.token) {
+        let user = await userCtrl.getUserByToken(req.params.token);
+        if (user && user !== undefined) {
+            res.send(user);
+        } else {
+            res.set('Content-Type', 'application/json');
+            res.status(404).send('user does not exist');
+        }
+    } else {
+        res.status(400).send('missing params');
+    }
+});
+
 module.exports = router;

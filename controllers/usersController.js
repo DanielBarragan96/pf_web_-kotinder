@@ -231,5 +231,38 @@ class UsersController {
             return;
         }
     }
+
+    async getUserByToken(token) {
+        const q = {
+            selector: {
+                token: {
+                    "$eq": token
+                }
+            }
+        };
+        let docs = await USERS_DB_CLOUDANT.find(q);
+        // console.log(docs);
+        if (docs.docs.length > 0) {
+            let user = {
+                nombre: docs.docs[0].nombre,
+                apellidos: docs.docs[0].apellidos,
+                email: docs.docs[0].email,
+                password: docs.docs[0].password,
+                fecha: docs.docs[0].fecha,
+                sexo: docs.docs[0].sexo,
+                image: docs.docs[0].image,
+                uid: docs.docs[0]._id,
+                rev: docs.docs[0]._rev,
+                token: docs.docs[0].token
+            }
+
+            if (docs.docs[0].token) {
+                user.token = docs.docs[0].token;
+            }
+            return user;
+        } else {
+            return;
+        }
+    }
 }
 module.exports = UsersController;
