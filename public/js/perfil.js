@@ -7,6 +7,9 @@ const HTTTPMethods = {
 const APIURL = window.location.protocol + '//' + window.location.host + '/api';
 let TOKEN = getTokenValue('token');
 
+let Guser;
+let Gpets;
+
 function getTokenValue(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -49,22 +52,43 @@ function sendHTTPRequest(urlAPI, data, method, cbOK, cbError, authToken) {
     };
 }
 
-function addUserData() {
+function usertoHTML(user) {
+    document.getElementById("user_image").src = user.image;
+    document.getElementById("user_name").innerHTML = user.nombre + " " + user.apellidos;
+    document.getElementById("user_email").innerHTML = `<i class="fa fa-envelope" aria-hidden="true"></i> ` + user.email;
+    document.getElementById("user_date").innerHTML = `<i class="fas fa-birthday-cake" aria-hidden="true"></i> ` + user.fecha;
+    let gender = (user.sexo == 'H') ? "Hombre" : "Mujer";
+    document.getElementById("user_gender").innerHTML = `<i class="fas fa-venus-mars"></i> ` + gender;
+}
+
+async function addUserData() {
     let url = APIURL + `/users/getby/token`;
-    sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
+    await sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
         let user = JSON.parse(res.data);
-        document.getElementById("user_image").src = user.image;
-        document.getElementById("user_name").innerHTML = user.nombre + " " + user.apellidos;
-        document.getElementById("user_email").innerHTML = `<i class="fa fa-envelope" aria-hidden="true"></i> ` + user.email;
-        document.getElementById("user_date").innerHTML = `<i class="fas fa-birthday-cake" aria-hidden="true"></i> ` + user.fecha;
-        let gender = (user.sexo == 'H') ? "Hombre" : "Mujer";
-        document.getElementById("user_gender").innerHTML = `<i class="fas fa-venus-mars"></i> ` + gender;
+        Guser = user;
+        usertoHTML(user);
+        loadPets();
+        return user;
     }, (error) => {}, token);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function petToHtml(pet) {
+
+}
+
+function loadPets() {
+    let url = APIURL + `/pets/?owner_id=${Guser.uid}`;
+    sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
+        let pets = JSON.parse(res.data);
+        // console.log(pets);
+        Gpets = pets;
+        return pets;
+    }, (error) => {}, token);
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
     //agrega tu codigo de asignación de eventos...
-    addUserData();
+    await addUserData();
 
     $('#modelAddMascota').on('show.bs.modal', function (event) {
         // console.log(event.relatedTarget);
