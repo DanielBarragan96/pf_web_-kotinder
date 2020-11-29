@@ -24,25 +24,29 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     let petsCtrl = new PetsController();
     let pets = await petsCtrl.getList();
-    if (req.query.name) {
-        let nom = (req.query.name) ? req.query.name : '';
-        pets = pets.filter((ele, index, arr) => {
-            let isMatch = true;
-            if (nom) {
-                isMatch &= ele.nombre.toUpperCase().includes(nom.toUpperCase())
-            }
-            return isMatch;
-        });
-    }
-    if (req.query.page) {
-        let limit = (req.query.limit) ? parseInt(req.query.limit) : 5;
-        let page = parseInt(req.query.page) * limit - limit;
-        pets = pets.slice(page, page + limit);
+    if (req.params.owner_id) {
+        pets = pets.filter(pet => pet.owner_id = req.params.owner_id);
     } else {
-        pets = pets.slice(0, 0 + 5);
-    }
-    if (req.query.date) {
-        pets = pets.filter(ele => new Date(ele.fecha).getTime() === new Date(req.query.date).getTime());
+        if (req.query.name) {
+            let nom = (req.query.name) ? req.query.name : '';
+            pets = pets.filter((ele, index, arr) => {
+                let isMatch = true;
+                if (nom) {
+                    isMatch &= ele.nombre.toUpperCase().includes(nom.toUpperCase())
+                }
+                return isMatch;
+            });
+        }
+        if (req.query.page) {
+            let limit = (req.query.limit) ? parseInt(req.query.limit) : 5;
+            let page = parseInt(req.query.page) * limit - limit;
+            pets = pets.slice(page, page + limit);
+        } else {
+            pets = pets.slice(0, 0 + 5);
+        }
+        if (req.query.date) {
+            pets = pets.filter(ele => new Date(ele.fecha).getTime() === new Date(req.query.date).getTime());
+        }
     }
 
     pets = pets.map((val, index, arra) => {
