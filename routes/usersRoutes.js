@@ -63,6 +63,23 @@ router.get('/', async (req, res) => {
     res.send(users);
 });
 
+router.get('/getby/token', async (req, res) => {
+    let userCtrl = new UsersController();
+
+    let token = req.get('x-auth-user');
+    if (token) {
+        let user = await userCtrl.getUserByToken(token);
+        if (user && user !== undefined) {
+            res.send(user);
+        } else {
+            res.set('Content-Type', 'application/json');
+            res.status(404).send('user does not exist');
+        }
+    } else {
+        res.status(400).send('missing params');
+    }
+});
+
 router.get('/:email', async (req, res) => {
     let userCtrl = new UsersController();
 
@@ -111,23 +128,6 @@ router.delete('/:email', async (req, res) => {
         }
     } else {
         res.status(400).send('missing arguments');
-    }
-});
-
-router.get('/token/:token', async (req, res) => {
-    let userCtrl = new UsersController();
-
-    console.log(req.params.token);
-    if (req.params.token) {
-        let user = await userCtrl.getUserByToken(req.params.token);
-        if (user && user !== undefined) {
-            res.send(user);
-        } else {
-            res.set('Content-Type', 'application/json');
-            res.status(404).send('user does not exist');
-        }
-    } else {
-        res.status(400).send('missing params');
     }
 });
 

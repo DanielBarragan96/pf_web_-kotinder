@@ -16,6 +16,13 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- Styles -->
+    <style>
+      input:invalid {
+        border-color: red;
+      }
+    </style>
+
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -91,25 +98,27 @@
       <tr>
         <td class="columna_perfil">
           <div class="carta_perfil">
-            <p align="right"><a href="#editar_perfil">Editar</a></p>
             <img
               class="imagen_perfil"
+              id="user_image"
               src="https://ximg.es/300.png/09f/fff"
               alt=""
             />
             <div class="carta-perfil-body">
-              <h4 class="card-title">Nombre</h4>
+              <h4 class="card-title" id="user_name">Nombre</h4>
               <hr />
-              <i class="fa fa-handshake" aria-hidden="true"></i> 3 acomodos
-              exitosos
-              <hr />
-              <i class="fa fa-envelope" aria-hidden="true"></i>
-              correo@prueba.com
-              <hr />
-              <i class="fa fa-phone" aria-hidden="true"></i> 3312941712
-              <hr />
-              <i class="fa fa-map-marker" aria-hidden="true"></i> Zapopan,
-              Jalisco
+              <p id="user_email">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                correo@prueba.com
+              </p>
+              <p id="user_date">
+                <i class="fas fa-birthday-cake" aria-hidden="true"></i>
+                2020-01-01
+              </p>
+              <p id="user_gender">
+                <i class="fas fa-venus-mars"></i>
+                Sin definir
+              </p>
             </div>
           </div>
         </td>
@@ -172,7 +181,7 @@
             type="button"
             class="btn btn-light btn-circle btn-xl"
             data-toggle="modal"
-            data-target="#model3"
+            data-target="#modelAddMascota"
           >
             <i class="fa fa-plus fa-3x"></i>
           </button>
@@ -183,7 +192,7 @@
     <!-- Modal 3 Añadir Mascota -->
     <div
       class="modal fade"
-      id="model3"
+      id="modelAddMascota"
       tabindex="-1"
       role="dialog"
       aria-labelledby="modelTitleId"
@@ -210,7 +219,7 @@
                 <span class="input-group-text" id="basic-addon1">
                   <i class="fas fa-bug"></i
                 ></span>
-                <select class="custom-select" id="Sexo">
+                <select class="custom-select" id="Sexo" required>
                   <option value="1">Perro</option>
                   <option value="2">Gato</option>
                   <option value="3">Ave</option>
@@ -237,6 +246,7 @@
                   class="form-control"
                   placeholder="Nombre de tu mascota"
                   aria-describedby="helpId"
+                  required
                 />
               </div>
             </div>
@@ -255,6 +265,7 @@
                   class="form-control"
                   placeholder="Gustos, personalidad..."
                   aria-describedby="helpId"
+                  required
                 />
               </div>
             </div>
@@ -284,8 +295,8 @@
                   name="Cumpleaños"
                   id="Cumpleaños"
                   class="form-control"
-                  placeholder="Gustos, personalidad..."
                   aria-describedby="helpId"
+                  required
                 />
               </div>
             </div>
@@ -322,6 +333,7 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script src="js/perfil.js"></script>
     <link rel="stylesheet" href="bootstrap.css" />
   </body>
 </html>
