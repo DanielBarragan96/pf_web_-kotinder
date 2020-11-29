@@ -95,7 +95,7 @@
           <p align="center">Tus mascotas que buscan hogar</p>
         </td>
       </tr>
-      <tr>
+      <tr id="petsRow">
         <td class="columna_perfil">
           <div class="carta_perfil">
             <img class="imagen_perfil" id="user_image" alt="" />
@@ -116,70 +116,6 @@
               </p>
             </div>
           </div>
-        </td>
-        <td class="columna_mascotas">
-          <!-- Carta -->
-          <div class="card">
-            <!-- Carrusel mascotas -->
-            <div class="carrusel_padre">
-              <div id="carouselId" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li
-                    data-target="#carouselId"
-                    data-slide-to="0"
-                    class="active"
-                  ></li>
-                  <li data-target="#carouselId" data-slide-to="1"></li>
-                  <li data-target="#carouselId" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                  <div class="carousel-item active">
-                    <img
-                      class="imagen_carta"
-                      src="https://ximg.es/300.png/09f/fff"
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      class="imagen_carta"
-                      src="https://ximg.es/300.png/09f/fff"
-                    />
-                  </div>
-                  <div class="carousel-item">
-                    <img
-                      class="imagen_carta"
-                      src="https://ximg.es/300.png/09f/fff"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <h4 class="card-title">Nombre</h4>
-              <hr />
-              <i class="fa fa-info-circle" aria-hidden="true"></i> Soy un perro
-              muy juguetón, alegre y curioso. Me gustaría encontrar un hogar lo
-              más pronto posible.
-              <hr />
-              <i class="fa fa-venus-mars" aria-hidden="true"></i> Macho
-              <hr />
-              <i class="fa fa-birthday-cake" aria-hidden="true"></i> 20/03/20
-              <hr />
-              <i class="fa fa-map-marker" aria-hidden="true"></i> Zapopan,
-              Jalisco
-            </div>
-          </div>
-        </td>
-        <td class="columna_añadir">
-          <button
-            id="btn_plus"
-            type="button"
-            class="btn btn-light btn-circle btn-xl"
-            data-toggle="modal"
-            data-target="#modelAddMascota"
-          >
-            <i class="fa fa-plus fa-3x"></i>
-          </button>
         </td>
       </tr>
     </table>

@@ -54,6 +54,9 @@ router.get('/', async (req, res) => {
             "nombre": val.nombre,
             "type": val.type,
             "owner_id": val.owner_id,
+            "image": val.image,
+            "sexo": val.sexo,
+            "fecha": val.fecha,
             "uid": val._id
         }
     });

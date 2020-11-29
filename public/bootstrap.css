@@ -140,6 +140,8 @@
 }
 .columna_mascotas{
     width: 50%;
+    margin: 10px;
+    padding: 10px;
 }
 #btn_plus{
     width: 150px;

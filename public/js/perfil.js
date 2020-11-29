@@ -73,15 +73,71 @@ async function addUserData() {
 }
 
 function petToHtml(pet) {
+    document.getElementById("petsRow").innerHTML +=
+        `<td class="columna_mascotas">
+    <!-- Carta -->
+    <div class="card">
+      <!-- Carrusel mascotas -->
+      <div class="carrusel_padre">
+        <div id="carouselId" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li
+              data-target="#carouselId"
+              data-slide-to="0"
+              class="active"
+            ></li>
+            <li data-target="#carouselId" data-slide-to="1"></li>
+            <li data-target="#carouselId" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+              <img
+                class="imagen_carta"
+                src="${pet.image}"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">${pet.nombre}</h4>
+        <hr />
+        <i class="fa fa-info-circle" aria-hidden="true"></i> Soy un perro
+        muy juguetón, alegre y curioso. Me gustaría encontrar un hogar lo
+        más pronto posible.
+        <hr />
+        <i class="fa fa-venus-mars" aria-hidden="true"></i> ${pet.sexo}
+        <hr />
+        <i class="fa fa-birthday-cake" aria-hidden="true"></i> ${pet.fecha}
+      </div>
+    </div>
+  </td>`;
+}
 
+function addPlusButtonHTML() {
+    document.getElementById("petsRow").innerHTML +=
+        `<td class="columna_añadir">
+    <button
+      id="btn_plus"
+      type="button"
+      class="btn btn-light btn-circle btn-xl"
+      data-toggle="modal"
+      data-target="#modelAddMascota"
+    >
+      <i class="fa fa-plus fa-3x"></i>
+    </button>
+  </td>`;
 }
 
 function loadPets() {
     let url = APIURL + `/pets/?owner_id=${Guser.uid}`;
     sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
         let pets = JSON.parse(res.data);
-        // console.log(pets);
         Gpets = pets;
+        for (let pet of pets) {
+            petToHtml(pet);
+        }
+        addPlusButtonHTML();
         return pets;
     }, (error) => {}, token);
 }
