@@ -23,7 +23,7 @@
 .card{
     margin:auto;
     height:auto;
-    width: 300px;
+    width: 350px;
     margin-top: 1%;
     border-radius: 25px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -137,6 +137,16 @@
     height: 300px;
     border-radius: 150px;
     border: 4px solid lightgray;
+}
+.imagen_carta{
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+    border: 4px solid lightgray;
+    object-fit: cover;
 }
 .columna_mascotas{
     width: 50%;

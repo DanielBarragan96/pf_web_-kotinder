@@ -26,27 +26,26 @@ router.get('/', async (req, res) => {
     let pets = await petsCtrl.getList();
     if (req.params.owner_id) {
         pets = pets.filter(pet => pet.owner_id = req.params.owner_id);
+    }
+    if (req.query.name) {
+        let nom = (req.query.name) ? req.query.name : '';
+        pets = pets.filter((ele, index, arr) => {
+            let isMatch = true;
+            if (nom) {
+                isMatch &= ele.nombre.toUpperCase().includes(nom.toUpperCase())
+            }
+            return isMatch;
+        });
+    }
+    if (req.query.page) {
+        let limit = (req.query.limit) ? parseInt(req.query.limit) : 5;
+        let page = parseInt(req.query.page) * limit - limit;
+        pets = pets.slice(page, page + limit);
     } else {
-        if (req.query.name) {
-            let nom = (req.query.name) ? req.query.name : '';
-            pets = pets.filter((ele, index, arr) => {
-                let isMatch = true;
-                if (nom) {
-                    isMatch &= ele.nombre.toUpperCase().includes(nom.toUpperCase())
-                }
-                return isMatch;
-            });
-        }
-        if (req.query.page) {
-            let limit = (req.query.limit) ? parseInt(req.query.limit) : 5;
-            let page = parseInt(req.query.page) * limit - limit;
-            pets = pets.slice(page, page + limit);
-        } else {
-            pets = pets.slice(0, 0 + 5);
-        }
-        if (req.query.date) {
-            pets = pets.filter(ele => new Date(ele.fecha).getTime() === new Date(req.query.date).getTime());
-        }
+        pets = pets.slice(0, 0 + 5);
+    }
+    if (req.query.date) {
+        pets = pets.filter(ele => new Date(ele.fecha).getTime() === new Date(req.query.date).getTime());
     }
 
     pets = pets.map((val, index, arra) => {
@@ -57,7 +56,8 @@ router.get('/', async (req, res) => {
             "image": val.image,
             "sexo": val.sexo,
             "fecha": val.fecha,
-            "uid": val._id
+            "uid": val._id,
+            "description": val.description
         }
     });
     res.send(pets);
