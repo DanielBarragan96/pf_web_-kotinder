@@ -24,8 +24,9 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     let petsCtrl = new PetsController();
     let pets = await petsCtrl.getList();
-    if (req.params.owner_id) {
-        pets = pets.filter(pet => pet.owner_id = req.params.owner_id);
+    console.log(req.query);
+    if (req.query.owner_id) {
+        pets = pets.filter(pet => (pet.owner_id == req.query.owner_id));
     }
     if (req.query.name) {
         let nom = (req.query.name) ? req.query.name : '';

@@ -126,7 +126,7 @@ function addPlusButtonHTML() {
 }
 
 function loadPets() {
-  let url = APIURL + `/pets/?owner_id=${Guser.uid}&page=1&limit=2`;
+  let url = APIURL + `/pets?owner_id=${Guser.uid}&page=1&limit=2`;
   sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
     let pets = JSON.parse(res.data);
     Gpets = pets;
