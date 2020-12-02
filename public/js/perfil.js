@@ -9,6 +9,9 @@ let TOKEN = getTokenValue('token');
 
 let Guser;
 let Gpets;
+let curr_page = 1;
+let limit = 2;
+let totalPages = 2;
 
 function getTokenValue(cname) {
   var name = cname + "=";
@@ -52,13 +55,30 @@ function sendHTTPRequest(urlAPI, data, method, cbOK, cbError, authToken) {
   };
 }
 
-function usertoHTML(user) {
-  document.getElementById("user_image").src = user.image;
-  document.getElementById("user_name").innerHTML = user.nombre + " " + user.apellidos;
-  document.getElementById("user_email").innerHTML = `<i class="fa fa-envelope" aria-hidden="true"></i> ` + user.email;
-  document.getElementById("user_date").innerHTML = `<i class="fas fa-birthday-cake" aria-hidden="true"></i> ` + user.fecha;
-  let gender = (user.sexo == 'H') ? "Hombre" : "Mujer";
-  document.getElementById("user_gender").innerHTML = `<i class="fas fa-venus-mars"></i> ` + gender;
+function addProfileCard(user) {
+  document.getElementById('petsRow').innerHTML += `
+  <td class="columna_perfil">
+          <div class="carta_perfil">
+            <img class="imagen_perfil" id="user_image" alt="" src="${user.image}" />
+            <div class="carta-perfil-body">
+              <h4 class="card-title" id="user_name">${user.nombre}</h4>
+              <hr />
+              <p id="user_email">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                ${user.email}
+              </p>
+              <p id="user_date">
+                <i class="fas fa-birthday-cake" aria-hidden="true"></i>
+                ${user.fecha}
+              </p>
+              <p id="user_gender">
+                <i class="fas fa-venus-mars"></i>
+                ${user.sexo}
+              </p>
+            </div>
+          </div>
+        </td>
+  `;
 }
 
 async function addUserData() {
@@ -66,7 +86,7 @@ async function addUserData() {
   await sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
     let user = JSON.parse(res.data);
     Guser = user;
-    usertoHTML(user);
+    addProfileCard(user);
     loadPets();
     return user;
   }, (error) => {}, token);
@@ -125,15 +145,61 @@ function addPlusButtonHTML() {
   </td>`;
 }
 
+function updatePage(newPage) {
+  if (newPage != curr_page) {
+    curr_page = newPage;
+    document.getElementById("petsRow").innerHTML = '';
+    document.getElementById("page_buttons").innerHTML = '';
+    addProfileCard(Guser);
+    loadPets();
+  }
+}
+
+const getPagesBtns = () => {
+  let first_page = curr_page;
+  if (first_page > 1) {
+    if ((first_page + 1) <= totalPages) {
+      return `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page - 1})">Previous</a></li>` +
+        `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page - 1})">${first_page - 1}</a></li>` +
+        `<li class="page-item active"><a class="page-link" href="javascript:updatePage(${first_page})">${first_page}</a></li>` +
+        `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">${first_page + 1}</a></li>` +
+        `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">Next</a></li>`;
+    } else {
+      return `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page - 1})">Previous</a></li>` +
+        `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page - 1})">${first_page - 1}</a></li>` +
+        `<li class="page-item active"><a class="page-link" href="javascript:updatePage(${first_page})">${first_page}</a></li>` +
+        `<li class="page-item disabled"><a class="page-link">Next</a></li>`;
+    }
+  } else if (totalPages >= 3) {
+    return `<li class="page-item disabled"><a class="page-link">Previous</a></li>` +
+      `<li class="page-item active"><a class="page-link" href="javascript:updatePage(${first_page})">${first_page}</a></li>` +
+      `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">${first_page + 1}</a></li>` +
+      `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 2})">${first_page + 2}</a></li>` +
+      `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">Next</a></li>`;
+  } else {
+    return `<li class="page-item disabled"><a class="page-link">Previous</a></li>` +
+      `<li class="page-item active"><a class="page-link" href="javascript:updatePage(${first_page})">${first_page}</a></li>` +
+      `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">${first_page + 1}</a></li>` +
+      `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">Next</a></li>`;
+
+  }
+}
+
+function addPageButton() {
+  document.getElementById('page_buttons').innerHTML = getPagesBtns();
+}
+
 function loadPets() {
-  let url = APIURL + `/pets?owner_id=${Guser.uid}&page=1&limit=2`;
+  let url = APIURL + `/pets?owner_id=${Guser.uid}&page=${curr_page}&limit=${limit}`;
   sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
+    console.log(res);
     let pets = JSON.parse(res.data);
     Gpets = pets;
     for (let pet of pets) {
       petToHtml(pet);
     }
     addPlusButtonHTML();
+    addPageButton();
     return pets;
   }, (error) => {}, token);
 }
