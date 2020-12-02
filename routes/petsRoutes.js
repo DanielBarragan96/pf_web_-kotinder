@@ -30,7 +30,6 @@ router.get('/', async (req, res) => {
     } else if (req.query.not_owner_id) {
         pets = pets.filter(pet => (pet.owner_id != req.query.not_owner_id));
     }
-    console.log(pets);
     if (req.query.name) {
         let nom = (req.query.name) ? req.query.name : '';
         pets = pets.filter((ele, index, arr) => {

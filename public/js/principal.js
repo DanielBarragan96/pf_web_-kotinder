@@ -81,7 +81,7 @@ function petToHtml(pet) {
 }
 
 function loadOtherPets() {
-    let url = APIURL + `/pets?not_owner_id=${Guser.uid}&page=1&limit=2`;
+    let url = APIURL + `/pets?not_owner_id=${Guser.uid}`;
     sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
         let pets = JSON.parse(res.data);
         GOtherpets = pets;
