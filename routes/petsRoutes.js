@@ -24,10 +24,13 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     let petsCtrl = new PetsController();
     let pets = await petsCtrl.getList();
-    console.log(req.query);
+    // console.log(req.query);
     if (req.query.owner_id) {
         pets = pets.filter(pet => (pet.owner_id == req.query.owner_id));
+    } else if (req.query.not_owner_id) {
+        pets = pets.filter(pet => (pet.owner_id != req.query.not_owner_id));
     }
+    console.log(pets);
     if (req.query.name) {
         let nom = (req.query.name) ? req.query.name : '';
         pets = pets.filter((ele, index, arr) => {
