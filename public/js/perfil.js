@@ -92,7 +92,7 @@ async function addUserData() {
   }, (error) => {}, token);
 }
 
-function petToHtml(pet) {
+function petToHtml(pet, index) {
   document.getElementById("petsRow").innerHTML +=
     `<td class="columna_mascotas">
     <!-- Carta -->
@@ -125,6 +125,8 @@ function petToHtml(pet) {
         <i class="fa fa-venus-mars" aria-hidden="true"></i> ${pet.sexo}
         <hr />
         <i class="fa fa-birthday-cake" aria-hidden="true"></i> ${pet.fecha}
+        <hr />
+        <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#deleteFormModal" data-index="${index}">Delete</button>
       </div>
     </div>
   </td>`;
@@ -193,8 +195,8 @@ function loadPets() {
   sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
     let pets = JSON.parse(res.data);
     Gpets = pets;
-    for (let pet of pets) {
-      petToHtml(pet);
+    for (let index = 0; index < pets.length; index++) {
+      petToHtml(pets[index], index);
     }
     addPlusButtonHTML();
     addPageButton();
@@ -206,12 +208,7 @@ function addNewPet(pet) {
   let url = APIURL + '/pets/';
   sendHTTPRequest(url, pet, HTTTPMethods.post, (datos) => {
     alert("Mascota registrado.");
-
-    //reset fields
-    document.getElementById("addPetNombre").value = "";
-    document.getElementById("addPetDescription").value = "";
-    document.getElementById("addPetImage").value = "";
-    document.getElementById("addButton").disabled = true;
+    location.reload();
   }, (error) => {
     console.log(error);
     alert(`No se pudo registrar, favor de revisar los campos. ${error}`);
@@ -249,5 +246,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     console.log(newPet);
     addNewPet(newPet);
+  });
+
+  $('#deleteFormModal').on('show.bs.modal', function (event) {
+    // console.log(event.relatedTarget);
+    //agrega el códgio necesario...
+    let index = event.relatedTarget.getAttribute('data-index');
+    $('#deleteUserBtn').attr("data-index", index);
+  });
+
+  $('#deleteUserBtn').on('click', function (event) {
+    var index = $('#deleteUserBtn').data('index');
+    let url = APIURL + "/pets/" + Gpets[index].uid;
+    sendHTTPRequest(url, '', HTTTPMethods.delete, (res) => {
+      // console.log(res);
+      location.reload();
+    }, (error) => {
+      console.log(error);
+    }, TOKEN)
   });
 });
