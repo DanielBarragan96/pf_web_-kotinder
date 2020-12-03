@@ -206,6 +206,12 @@ function addNewPet(pet) {
   let url = APIURL + '/pets/';
   sendHTTPRequest(url, pet, HTTTPMethods.post, (datos) => {
     alert("Mascota registrado.");
+
+    //reset fields
+    document.getElementById("addPetNombre").value = "";
+    document.getElementById("addPetDescription").value = "";
+    document.getElementById("addPetImage").value = "";
+    document.getElementById("addButton").disabled = true;
   }, (error) => {
     console.log(error);
     alert(`No se pudo registrar, favor de revisar los campos. ${error}`);
@@ -243,11 +249,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     console.log(newPet);
     addNewPet(newPet);
-
-    //reset fields
-    // document.getElementById("addPetNombre").value = "";
-    // document.getElementById("addPetDescription").value = "";
-    // document.getElementById("addPetImage").value = "";
-    // document.getElementById("addButton").disabled = true;
   });
 });
