@@ -73,7 +73,7 @@ function addProfileCard(user) {
               </p>
               <p id="user_gender">
                 <i class="fas fa-venus-mars"></i>
-                ${user.sexo}
+                ${(user.sexo == "H") ? "Hombre" : "Mujer"}
               </p>
             </div>
           </div>
@@ -181,7 +181,6 @@ const getPagesBtns = () => {
       `<li class="page-item active"><a class="page-link" href="javascript:updatePage(${first_page})">${first_page}</a></li>` +
       `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">${first_page + 1}</a></li>` +
       `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">Next</a></li>`;
-
   }
 }
 
