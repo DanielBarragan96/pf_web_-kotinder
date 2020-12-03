@@ -98,7 +98,7 @@ class PetsController {
                 }
             }
         };
-        let docs = await USERS_DB_CLOUDANT.find(q);
+        let docs = await PETS_DB_CLOUDANT.find(q);
         return docs;
     }
 

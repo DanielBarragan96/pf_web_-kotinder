@@ -6,10 +6,10 @@ const router = express();
 
 router.post('/', async (req, res) => {
     let b = req.body;
-    if (b.type && b.nombre && b.email && b.owner_id && b.fecha) {
+    if (b.type && b.nombre && b.type && b.owner_id && b.fecha) {
         let p = await petsCtrl.getUniquePet(b.nombre, b.type, b.owner_id);
-        console.log(p);
-        if (p) {
+        console.log(p.bookmark);
+        if (p.bookmark != 'nil') {
             res.status(400).send('pet already exists');
         } else {
             petsCtrl.insertPet(b, (newPet) => {
