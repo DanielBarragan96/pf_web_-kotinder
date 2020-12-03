@@ -132,15 +132,15 @@
                 <span class="input-group-text" id="basic-addon1">
                   <i class="fas fa-bug"></i
                 ></span>
-                <select class="custom-select" id="Sexo" required>
-                  <option value="1">Perro</option>
-                  <option value="2">Gato</option>
-                  <option value="3">Ave</option>
-                  <option value="4">Reptil</option>
-                  <option value="5">Roedor</option>
-                  <option value="6">Arácnido</option>
-                  <option value="7">Pez</option>
-                  <option value="8">Otro</option>
+                <select class="custom-select" id="petType" required>
+                  <option value="Perro">Perro</option>
+                  <option value="Gato">Gato</option>
+                  <option value="Ave">Ave</option>
+                  <option value="Reptil">Reptil</option>
+                  <option value="Roedor">Roedor</option>
+                  <option value="Arácnido">Arácnido</option>
+                  <option value="Pez">Pez</option>
+                  <option value="Otro">Otro</option>
                 </select>
               </div>
             </div>
@@ -189,7 +189,7 @@
                 <span class="input-group-text" id="basic-addon1">
                   <i class="fas fa-venus-mars"></i
                 ></span>
-                <select class="custom-select" id="Sexo">
+                <select class="custom-select" id="addPetSexo">
                   <option value="M">Macho</option>
                   <option value="H">Hembra</option>
                 </select>
@@ -210,6 +210,25 @@
                   class="form-control"
                   aria-describedby="helpId"
                   value="2020-01-01"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group form">
+              <label for="Descripción">Imagen</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fas fa-image"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  name="Imagen"
+                  id="addPetImage"
+                  class="form-control"
+                  placeholder="Url de la imagen"
+                  aria-describedby="helpId"
                   required
                 />
               </div>

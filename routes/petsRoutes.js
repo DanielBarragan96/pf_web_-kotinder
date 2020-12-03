@@ -86,6 +86,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
+    console.log(req.params);
     if (req.params.id) {
         let p = await petsCtrl.getPet(req.params.id);
         if (p) {

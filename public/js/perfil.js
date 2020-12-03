@@ -202,6 +202,16 @@ function loadPets() {
   }, (error) => {}, token);
 }
 
+function addNewPet(pet) {
+  let url = APIURL + '/pets/';
+  sendHTTPRequest(url, pet, HTTTPMethods.post, (datos) => {
+    alert("Mascota registrado.");
+  }, (error) => {
+    console.log(error);
+    alert(`No se pudo registrar, favor de revisar los campos. ${error}`);
+  }, TOKEN);
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   //agrega tu codigo de asignación de eventos...
   await addUserData();
@@ -214,15 +224,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   $('#modelAddMascota').on('keyup', function (event) {
     let addNombreValid = document.getElementById("addPetNombre").checkValidity();
     let addDecriptionValid = document.getElementById("addPetDescription").checkValidity();
+    let addImageValid = document.getElementById("addPetImage").checkValidity();
     document.getElementById("addButton").disabled = !(
-      addNombreValid && addDecriptionValid
+      addNombreValid && addDecriptionValid && addImageValid
     );
   });
 
   //al presionar el boton 
   $('#addButton').on('click', function (event) {
-    document.getElementById("addPetNombre").value = "";
-    document.getElementById("addPetDescription").value = "";
+    let newPet = JSON.stringify({
+      type: document.getElementById('petType').value,
+      nombre: document.getElementById('addPetNombre').value,
+      owner_id: Guser.uid,
+      fecha: document.getElementById('addPetBirthday').value,
+      sexo: document.getElementById('addPetSexo').value,
+      image: document.getElementById('addPetImage').value,
+      description: document.getElementById('addPetDescription').value
+    });
+    console.log(newPet);
+    addNewPet(newPet);
 
+    //reset fields
+    // document.getElementById("addPetNombre").value = "";
+    // document.getElementById("addPetDescription").value = "";
+    // document.getElementById("addPetImage").value = "";
+    // document.getElementById("addButton").disabled = true;
   });
 });
