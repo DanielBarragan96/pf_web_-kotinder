@@ -155,7 +155,7 @@
                 <input
                   type="text"
                   name="Nombre"
-                  id="Nombre"
+                  id="addPetNombre"
                   class="form-control"
                   placeholder="Nombre de tu mascota"
                   aria-describedby="helpId"
@@ -174,7 +174,7 @@
                 <input
                   type="text"
                   name="Descripción"
-                  id="Contra1"
+                  id="addPetDescription"
                   class="form-control"
                   placeholder="Gustos, personalidad..."
                   aria-describedby="helpId"
@@ -206,15 +206,22 @@
                 <input
                   type="date"
                   name="Cumpleaños"
-                  id="Cumpleaños"
+                  id="addPetBirthday"
                   class="form-control"
                   aria-describedby="helpId"
+                  value="2020-01-01"
                   required
                 />
               </div>
             </div>
             <hr />
-            <button type="button" class="btn btn-light" data-dismiss="modal">
+            <button
+              type="button"
+              id="addButton"
+              class="btn btn-light"
+              data-dismiss="modal"
+              disabled
+            >
               Añadir
             </button>
             <button

@@ -191,7 +191,6 @@ function addPageButton() {
 function loadPets() {
   let url = APIURL + `/pets?owner_id=${Guser.uid}&page=${curr_page}&limit=${limit}`;
   sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
-    console.log(res);
     let pets = JSON.parse(res.data);
     Gpets = pets;
     for (let pet of pets) {
@@ -212,8 +211,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     //agrega tu codigo...
   });
 
+  $('#modelAddMascota').on('keyup', function (event) {
+    let addNombreValid = document.getElementById("addPetNombre").checkValidity();
+    let addDecriptionValid = document.getElementById("addPetDescription").checkValidity();
+    document.getElementById("addButton").disabled = !(
+      addNombreValid && addDecriptionValid
+    );
+  });
+
   //al presionar el boton 
-  $('#createUserBtn').on('click', function (event) {
-    //
+  $('#addButton').on('click', function (event) {
+    document.getElementById("addPetNombre").value = "";
+    document.getElementById("addPetDescription").value = "";
+
   });
 });
