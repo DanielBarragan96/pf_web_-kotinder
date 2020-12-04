@@ -44,7 +44,7 @@ router.delete('/', async (req, res) => {
     if (b.id_user && b.id_pet) {
         let f = await favsController.getUserFavs(b.id_user, b.id_pet);
         if (f) {
-            let deleted = await favsController.deleteFav(f);
+            let deleted = await favsController.deleteFav(f.docs[0]);
             res.status(200).send({
                 "deleted": deleted
             });

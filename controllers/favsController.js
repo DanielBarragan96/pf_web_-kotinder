@@ -53,6 +53,7 @@ class FavsController {
 
     async deleteFav(fav) {
         console.log('deleting pet');
+        console.log('' + fav._id + fav._rev);
         let body = await FAVS_DB_CLOUDANT.destroy(fav._id, fav._rev);
         console.log(body);
         if (body.ok) {
