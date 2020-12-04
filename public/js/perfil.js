@@ -263,11 +263,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // console.log(event.relatedTarget);
     //agrega el códgio necesario...
     let index = event.relatedTarget.getAttribute('data-index');
-    $('#deleteUserBtn').attr("data-index", index);
+    $('#deletePetBtn').attr("data-index", index);
   });
 
-  $('#deleteUserBtn').on('click', function (event) {
-    var index = $('#deleteUserBtn').data('index');
+  $('#deletePetBtn').on('click', function (event) {
+    var index = $('#deletePetBtn').data('index');
     let url = APIURL + "/pets/" + Gpets[index].uid;
     sendHTTPRequest(url, '', HTTTPMethods.delete, (res) => {
       // console.log(res);
