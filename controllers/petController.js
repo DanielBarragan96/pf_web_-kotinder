@@ -48,7 +48,8 @@ class PetsController {
     }
     async deletePet(pet) {
         console.log('deleting pet');
-        let body = await PETS_DB_CLOUDANT.destroy(pet.uid, pet.rev);
+        console.log(pet);
+        let body = await PETS_DB_CLOUDANT.destroy(pet._id, pet._rev);
         console.log(body);
         if (body.ok) {
             return body;
@@ -98,7 +99,7 @@ class PetsController {
                 }
             }
         };
-        let docs = await USERS_DB_CLOUDANT.find(q);
+        let docs = await PETS_DB_CLOUDANT.find(q);
         return docs;
     }
 

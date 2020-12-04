@@ -14,7 +14,7 @@ app.use(express.urlencoded({
 const usersRouter = require('./routes/usersRoutes');
 const UsersController = require('./controllers/usersController');
 const petsRouter = require('./routes/petsRoutes');
-// const PetsController = require('./controllers/petController');
+const favsRouter = require('./routes/favsRoutes');
 const Secrets = require('./secrets');
 let secrets = new Secrets();
 const PORT = process.env.PORT || 3000;
@@ -46,6 +46,7 @@ async function authentication(req, res, next) {
 }
 app.use('/api/users', authentication, usersRouter);
 app.use('/api/pets', authentication, petsRouter);
+app.use('/api/favs', authentication, favsRouter);
 app.post('/api/login', async (req, res) => {
     if (req.body.email && req.body.password) {
         let uctrl = new UsersController();

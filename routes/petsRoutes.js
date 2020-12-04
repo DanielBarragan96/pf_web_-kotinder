@@ -6,10 +6,10 @@ const router = express();
 
 router.post('/', async (req, res) => {
     let b = req.body;
-    if (b.type && b.nombre && b.email && b.owner_id && b.fecha) {
+    if (b.type && b.nombre && b.type && b.owner_id && b.fecha) {
         let p = await petsCtrl.getUniquePet(b.nombre, b.type, b.owner_id);
-        console.log(p);
-        if (p) {
+        console.log(p.bookmark);
+        if (p.bookmark != 'nil') {
             res.status(400).send('pet already exists');
         } else {
             petsCtrl.insertPet(b, (newPet) => {
@@ -68,8 +68,8 @@ router.get('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     let b = req.body;
-    if (req.params.id && (b.nombre || b.image || b.fecha)) {
-        let p = await petsCtrl.getPet(b.id);
+    if (req.params.id && (b.nombre || b.image || b.fecha || b.description)) {
+        let p = await petsCtrl.getPet(req.params.id);
         if (p) {
             b._id = p.uid;
             b._rev = p.rev;
@@ -86,6 +86,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
+    console.log(req.params);
     if (req.params.id) {
         let p = await petsCtrl.getPet(req.params.id);
         if (p) {

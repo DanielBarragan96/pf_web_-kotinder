@@ -73,7 +73,7 @@ function addProfileCard(user) {
               </p>
               <p id="user_gender">
                 <i class="fas fa-venus-mars"></i>
-                ${user.sexo}
+                ${(user.sexo == "H") ? "Hombre" : "Mujer"}
               </p>
             </div>
           </div>
@@ -92,7 +92,7 @@ async function addUserData() {
   }, (error) => {}, token);
 }
 
-function petToHtml(pet) {
+function petToHtml(pet, index) {
   document.getElementById("petsRow").innerHTML +=
     `<td class="columna_mascotas">
     <!-- Carta -->
@@ -125,9 +125,22 @@ function petToHtml(pet) {
         <i class="fa fa-venus-mars" aria-hidden="true"></i> ${pet.sexo}
         <hr />
         <i class="fa fa-birthday-cake" aria-hidden="true"></i> ${pet.fecha}
+        <hr />
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modelEditMascota" data-index="${index}" onclick="loadEditPet(${index})">Detalles</button>
+        <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#deleteFormModal" data-index="${index}">Delete</button>
       </div>
     </div>
   </td>`;
+}
+
+function loadEditPet(index) {
+  document.getElementById('petTypeEdit').value = Gpets[index].type;
+  document.getElementById('editPetNombre').value = Gpets[index].nombre;
+  document.getElementById('editPetDescription').value = Gpets[index].description;
+  document.getElementById('editPetSexo').value = Gpets[index].sexo;
+  document.getElementById('editPetBirthday').value = Gpets[index].fecha;
+  document.getElementById('editPetImage').value = Gpets[index].image;
+  $('#editButton').attr("data-index", index);
 }
 
 function addPlusButtonHTML() {
@@ -181,7 +194,6 @@ const getPagesBtns = () => {
       `<li class="page-item active"><a class="page-link" href="javascript:updatePage(${first_page})">${first_page}</a></li>` +
       `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">${first_page + 1}</a></li>` +
       `<li class="page-item"><a class="page-link" href="javascript:updatePage(${first_page + 1})">Next</a></li>`;
-
   }
 }
 
@@ -192,16 +204,26 @@ function addPageButton() {
 function loadPets() {
   let url = APIURL + `/pets?owner_id=${Guser.uid}&page=${curr_page}&limit=${limit}`;
   sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
-    console.log(res);
     let pets = JSON.parse(res.data);
     Gpets = pets;
-    for (let pet of pets) {
-      petToHtml(pet);
+    for (let index = 0; index < pets.length; index++) {
+      petToHtml(pets[index], index);
     }
     addPlusButtonHTML();
     addPageButton();
     return pets;
   }, (error) => {}, token);
+}
+
+function addNewPet(pet) {
+  let url = APIURL + '/pets/';
+  sendHTTPRequest(url, pet, HTTTPMethods.post, (datos) => {
+    alert("Mascota registrado.");
+    location.reload();
+  }, (error) => {
+    console.log(error);
+    alert(`No se pudo registrar, favor de revisar los campos. ${error}`);
+  }, TOKEN);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -213,8 +235,67 @@ document.addEventListener('DOMContentLoaded', async () => {
     //agrega tu codigo...
   });
 
+  $('#modelAddMascota').on('keyup', function (event) {
+    let addNombreValid = document.getElementById("addPetNombre").checkValidity();
+    let addDecriptionValid = document.getElementById("addPetDescription").checkValidity();
+    let addImageValid = document.getElementById("addPetImage").checkValidity();
+    document.getElementById("addButton").disabled = !(
+      addNombreValid && addDecriptionValid && addImageValid
+    );
+  });
+
   //al presionar el boton 
-  $('#createUserBtn').on('click', function (event) {
-    //
+  $('#addButton').on('click', function (event) {
+    let newPet = JSON.stringify({
+      type: document.getElementById('petType').value,
+      nombre: document.getElementById('addPetNombre').value,
+      owner_id: Guser.uid,
+      fecha: document.getElementById('addPetBirthday').value,
+      sexo: document.getElementById('addPetSexo').value,
+      image: document.getElementById('addPetImage').value,
+      description: document.getElementById('addPetDescription').value
+    });
+    console.log(newPet);
+    addNewPet(newPet);
+  });
+
+  $('#deleteFormModal').on('show.bs.modal', function (event) {
+    // console.log(event.relatedTarget);
+    //agrega el códgio necesario...
+    let index = event.relatedTarget.getAttribute('data-index');
+    $('#deletePetBtn').attr("data-index", index);
+  });
+
+  $('#deletePetBtn').on('click', function (event) {
+    var index = $('#deletePetBtn').data('index');
+    let url = APIURL + "/pets/" + Gpets[index].uid;
+    sendHTTPRequest(url, '', HTTTPMethods.delete, (res) => {
+      // console.log(res);
+      location.reload();
+    }, (error) => {
+      console.log(error);
+    }, TOKEN);
+  });
+
+  $('#editButton').on('click', function (event) {
+    var index = $('#editButton').data('index');
+    let url = APIURL + "/pets/" + Gpets[index].uid;
+    let updatePet = JSON.stringify({
+      type: document.getElementById('petTypeEdit').value,
+      nombre: document.getElementById('editPetNombre').value,
+      owner_id: Guser.uid,
+      fecha: document.getElementById('editPetBirthday').value,
+      sexo: document.getElementById('editPetSexo').value,
+      image: document.getElementById('editPetImage').value,
+      description: document.getElementById('editPetDescription').value,
+      _id: Gpets[index].uid
+    });
+    console.log(updatePet);
+    sendHTTPRequest(url, updatePet, HTTTPMethods.put, (res) => {
+      // console.log(res);
+      location.reload();
+    }, (error) => {
+      console.log(error);
+    }, TOKEN)
   });
 });
