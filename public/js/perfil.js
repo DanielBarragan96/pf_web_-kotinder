@@ -126,10 +126,21 @@ function petToHtml(pet, index) {
         <hr />
         <i class="fa fa-birthday-cake" aria-hidden="true"></i> ${pet.fecha}
         <hr />
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modelEditMascota" data-index="${index}" onclick="loadEditPet(${index})">Detalles</button>
         <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#deleteFormModal" data-index="${index}">Delete</button>
       </div>
     </div>
   </td>`;
+}
+
+function loadEditPet(index) {
+  document.getElementById('petTypeEdit').value = Gpets[index].type;
+  document.getElementById('editPetNombre').value = Gpets[index].nombre;
+  document.getElementById('editPetDescription').value = Gpets[index].description;
+  document.getElementById('editPetSexo').value = Gpets[index].sexo;
+  document.getElementById('editPetBirthday').value = Gpets[index].fecha;
+  document.getElementById('editPetImage').value = Gpets[index].image;
+  $('#editButton').attr("data-index", index);
 }
 
 function addPlusButtonHTML() {
@@ -259,6 +270,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     var index = $('#deleteUserBtn').data('index');
     let url = APIURL + "/pets/" + Gpets[index].uid;
     sendHTTPRequest(url, '', HTTTPMethods.delete, (res) => {
+      // console.log(res);
+      location.reload();
+    }, (error) => {
+      console.log(error);
+    }, TOKEN);
+  });
+
+  $('#editButton').on('click', function (event) {
+    var index = $('#editButton').data('index');
+    let url = APIURL + "/pets/" + Gpets[index].uid;
+    let updatePet = JSON.stringify({
+      type: document.getElementById('petTypeEdit').value,
+      nombre: document.getElementById('editPetNombre').value,
+      owner_id: Guser.uid,
+      fecha: document.getElementById('editPetBirthday').value,
+      sexo: document.getElementById('editPetSexo').value,
+      image: document.getElementById('editPetImage').value,
+      description: document.getElementById('editPetDescription').value,
+      _id: Gpets[index].uid
+    });
+    console.log(updatePet);
+    sendHTTPRequest(url, updatePet, HTTTPMethods.put, (res) => {
       // console.log(res);
       location.reload();
     }, (error) => {

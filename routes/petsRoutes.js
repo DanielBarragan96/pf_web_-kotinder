@@ -68,8 +68,8 @@ router.get('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     let b = req.body;
-    if (req.params.id && (b.nombre || b.image || b.fecha)) {
-        let p = await petsCtrl.getPet(b.id);
+    if (req.params.id && (b.nombre || b.image || b.fecha || b.description)) {
+        let p = await petsCtrl.getPet(req.params.id);
         if (p) {
             b._id = p.uid;
             b._rev = p.rev;

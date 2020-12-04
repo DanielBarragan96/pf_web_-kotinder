@@ -102,7 +102,7 @@
       </tr>
     </table>
 
-    <!-- Modal 3 Añadir Mascota -->
+    <!-- Modal Añadir Mascota -->
     <div
       class="modal fade"
       id="modelAddMascota"
@@ -255,7 +255,159 @@
       </div>
     </div>
 
-    <!-- Modal Delte Pet -->
+    <!-- Modal Editar Mascota -->
+    <div
+      class="modal fade"
+      id="modelEditMascota"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modelTitleId"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Añadir Mascota</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group form">
+              <label for="Sexo">Especie</label>
+              <div class="input-group"></div>
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <i class="fas fa-bug"></i
+                ></span>
+                <select class="custom-select" id="petTypeEdit" required>
+                  <option value="Perro">Perro</option>
+                  <option value="Gato">Gato</option>
+                  <option value="Ave">Ave</option>
+                  <option value="Reptil">Reptil</option>
+                  <option value="Roedor">Roedor</option>
+                  <option value="Arácnido">Arácnido</option>
+                  <option value="Pez">Pez</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group form">
+              <label for="Nombre">Nombre</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fas fa-paw"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  name="Nombre"
+                  id="editPetNombre"
+                  class="form-control"
+                  placeholder="Nombre de tu mascota"
+                  aria-describedby="helpId"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group form">
+              <label for="Descripción">Descripción</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fas fa-info-circle"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  name="Descripción"
+                  id="editPetDescription"
+                  class="form-control"
+                  placeholder="Gustos, personalidad..."
+                  aria-describedby="helpId"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group form">
+              <label for="Sexo">Sexo</label>
+              <div class="input-group"></div>
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">
+                  <i class="fas fa-venus-mars"></i
+                ></span>
+                <select class="custom-select" id="editPetSexo">
+                  <option value="Macho">Macho</option>
+                  <option value="Hembra">Hembra</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group form">
+              <label for="Cumpleaños">Cumpleaños</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fas fa-birthday-cake"></i
+                  ></span>
+                </div>
+                <input
+                  type="date"
+                  name="Cumpleaños"
+                  id="editPetBirthday"
+                  class="form-control"
+                  aria-describedby="helpId"
+                  value="2020-01-01"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group form">
+              <label for="Descripción">Imagen</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fas fa-image"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  name="Imagen"
+                  id="editPetImage"
+                  class="form-control"
+                  placeholder="Url de la imagen"
+                  aria-describedby="helpId"
+                  required
+                />
+              </div>
+            </div>
+            <hr />
+            <button
+              type="button"
+              id="editButton"
+              class="btn btn-light"
+              data-dismiss="modal"
+            >
+              Actualizar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Delete Pet -->
     <div
       class="modal fade"
       id="deleteFormModal"
