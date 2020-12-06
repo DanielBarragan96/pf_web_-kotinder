@@ -53,8 +53,16 @@ function sendHTTPRequest(urlAPI, data, method, cbOK, cbError, authToken) {
     };
 }
 
-function favToHtml(fav) {
-
+function favToHtml(pet) {
+    document.getElementById('fav_carousel').innerHTML += `
+        <div class="carousel-item ${(Gpets.length < 2)? 'active' : ''}">
+        <img
+            class="d-block imagen_carousel mx-auto"
+            src="${pet.image}"
+            alt="First slide"
+        />
+        </div>
+    `;
 }
 
 async function loadFavs() {
@@ -67,7 +75,7 @@ async function loadFavs() {
             sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
                 let pet = JSON.parse(res.data);
                 Gpets.push(pet[0]);
-                favToHtml(fav);
+                favToHtml(pet[0]);
                 return favs;
             }, (error) => {}, token);
         }
