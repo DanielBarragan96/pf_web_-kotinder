@@ -60,7 +60,8 @@ router.get('/', async (req, res) => {
             "sexo": val.sexo,
             "fecha": val.fecha,
             "uid": val._id,
-            "description": val.description
+            "description": val.description,
+            "rev": val._rev
         }
     });
     res.send(pets);
