@@ -56,11 +56,21 @@ function sendHTTPRequest(urlAPI, data, method, cbOK, cbError, authToken) {
 function favToHtml(pet) {
     document.getElementById('fav_carousel').innerHTML += `
         <div class="carousel-item ${(Gpets.length < 2)? 'active' : ''}">
-        <img
-            class="d-block imagen_carousel mx-auto"
-            src="${pet.image}"
-            alt="First slide"
-        />
+            <div class="card">
+                <img
+                    class="imagen_carta"
+                    src="${pet.image}"
+                />
+                <div class="card-body">
+                    <h4 class="card-title">${pet.nombre}</h4>
+                    <hr />
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> ${pet.description}
+                    <hr />
+                    <i class="fa fa-venus-mars" aria-hidden="true"></i> ${pet.sexo}
+                    <hr />
+                    <i class="fa fa-birthday-cake" aria-hidden="true"></i> ${pet.fecha}
+                </div>
+            </div>
         </div>
     `;
 }
@@ -96,4 +106,5 @@ async function addUserData() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     await addUserData();
+
 });
