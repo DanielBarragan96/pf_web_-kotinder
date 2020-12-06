@@ -141,6 +141,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 alert('Pet saved to favorites!');
                 return favs;
             }, (error) => {}, token);
+        } else {
+            alert('This pet is already on your favorites');
         }
     });
 });
