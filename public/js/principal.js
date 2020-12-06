@@ -10,6 +10,7 @@ let TOKEN = getTokenValue('token');
 let Guser;
 let GOtherpets;
 let currIndex = 0;
+let Gfavs;
 
 function getTokenValue(cname) {
     var name = cname + "=";
@@ -86,8 +87,19 @@ function loadOtherPets() {
         let pets = JSON.parse(res.data);
         GOtherpets = pets;
         petToHtml(GOtherpets[currIndex]);
+        loadFavs();
         return pets;
     }, (error) => {}, token);
+}
+
+async function loadFavs() {
+    let url = APIURL + `/favs/?id_user=${Guser.uid}`;
+    sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
+        let favs = JSON.parse(res.data);
+        Gfavs = favs;
+        return favs;
+    }, (error) => {}, token);
+
 }
 
 async function addUserData() {
