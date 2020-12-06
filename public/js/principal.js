@@ -121,4 +121,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         currIndex = (currIndex + 1 >= GOtherpets.length) ? 0 : ++currIndex;
         petToHtml(GOtherpets[currIndex]);
     });
+
+    $('#btn_superlike').on('click', function (event) {
+        let alreadyFav = false;
+        for (let fav of Gfavs) {
+            if (fav.id_pet == GOtherpets[currIndex].uid) {
+                alreadyFav = true;
+                break;
+            }
+        }
+        if (!alreadyFav) {
+            let url = APIURL + `/favs/`;
+            let body = JSON.stringify({
+                id_user: Guser.uid,
+                id_pet: GOtherpets[currIndex].uid
+            });
+            sendHTTPRequest(url, body, HTTTPMethods.post, (res) => {
+                let favs = JSON.parse(res.data);
+                alert('Pet saved to favorites!');
+                return favs;
+            }, (error) => {}, token);
+        }
+    });
 });
