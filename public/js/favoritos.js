@@ -53,9 +53,10 @@ function sendHTTPRequest(urlAPI, data, method, cbOK, cbError, authToken) {
     };
 }
 
-function favToHtml(pet) {
+function favToHtml(pet, active) {
+    console.log(pet);
     document.getElementById('fav_carousel').innerHTML += `
-        <div class="carousel-item ${(Gpets.length < 2)? 'active' : ''}">
+        <div class="carousel-item ${(active)? 'active' : ''}">
             <div class="card">
                 <img
                     class="imagen_carta"
@@ -85,7 +86,7 @@ async function loadFavs() {
             sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
                 let pet = JSON.parse(res.data);
                 Gpets.push(pet[0]);
-                favToHtml(pet[0]);
+                favToHtml(pet[0], Gpets.length < 2);
                 return favs;
             }, (error) => {}, token);
         }
@@ -106,5 +107,23 @@ async function addUserData() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     await addUserData();
+});
 
+var activities = document.getElementById('selectFavPets');
+activities.addEventListener("change", function () {
+    let type = activities.value;
+    if (type != '0') {
+        document.getElementById('fav_carousel').innerHTML = '';
+        let counter = 0;
+        for (let pet of Gpets) {
+            if (pet.type == type)
+                favToHtml(pet, (counter++ < 1));
+        }
+    } else {
+        document.getElementById('fav_carousel').innerHTML = '';
+        let counter = 0;
+        for (let pet of Gpets) {
+            favToHtml(pet, (counter++ < 1));
+        }
+    }
 });
