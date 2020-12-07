@@ -110,6 +110,25 @@ async function addUserData() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     await addUserData();
+
+    $('#deleteFormModal').on('show.bs.modal', function (event) {
+        let index = event.relatedTarget.getAttribute('data-index');
+        $('#deletePetBtn').attr("data-index", index);
+    });
+
+    $('#deletePetBtn').on('click', function (event) {
+        var index = $('#deletePetBtn').data('index');
+        let url = APIURL + "/favs/";
+        let body = JSON.stringify({
+            id_user: Guser.uid,
+            id_pet: GcurrentPets[index].uid
+        });
+        sendHTTPRequest(url, body, HTTTPMethods.delete, (res) => {
+            location.reload();
+        }, (error) => {
+            console.log(error);
+        }, TOKEN);
+    });
 });
 
 var activities = document.getElementById('selectFavPets');
