@@ -10,6 +10,7 @@ let TOKEN = getTokenValue('token');
 let Guser;
 let Gfavs;
 let Gpets = [];
+let GcurrentPets = [];
 
 function getTokenValue(cname) {
     var name = cname + "=";
@@ -53,10 +54,10 @@ function sendHTTPRequest(urlAPI, data, method, cbOK, cbError, authToken) {
     };
 }
 
-function favToHtml(pet, active) {
+function favToHtml(pet, index) {
     console.log(pet);
     document.getElementById('fav_carousel').innerHTML += `
-        <div class="carousel-item ${(active)? 'active' : ''}">
+        <div class="carousel-item ${(index < 1)? 'active' : ''}">
             <div class="card">
                 <img
                     class="imagen_carta"
@@ -70,6 +71,7 @@ function favToHtml(pet, active) {
                     <i class="fa fa-venus-mars" aria-hidden="true"></i> ${pet.sexo}
                     <hr />
                     <i class="fa fa-birthday-cake" aria-hidden="true"></i> ${pet.fecha}
+                    <button type="button" class="btn btn-danger float-right" data-toggle="modal" data-target="#deleteFormModal" data-index="${index}">Delete</button>
                 </div>
             </div>
         </div>
@@ -86,7 +88,8 @@ async function loadFavs() {
             sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
                 let pet = JSON.parse(res.data);
                 Gpets.push(pet[0]);
-                favToHtml(pet[0], Gpets.length < 2);
+                GcurrentPets.push(pet[0]);
+                favToHtml(pet[0], Gpets.length - 1);
                 return favs;
             }, (error) => {}, token);
         }
@@ -115,15 +118,18 @@ activities.addEventListener("change", function () {
     if (type != '0') {
         document.getElementById('fav_carousel').innerHTML = '';
         let counter = 0;
+        GcurrentPets = [];
         for (let pet of Gpets) {
-            if (pet.type == type)
-                favToHtml(pet, (counter++ < 1));
+            if (pet.type == type) {
+                GcurrentPets.push(pet);
+                favToHtml(pet, counter++);
+            }
         }
     } else {
         document.getElementById('fav_carousel').innerHTML = '';
         let counter = 0;
         for (let pet of Gpets) {
-            favToHtml(pet, (counter++ < 1));
+            favToHtml(pet, (counter++));
         }
     }
 });
