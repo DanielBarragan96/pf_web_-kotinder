@@ -288,7 +288,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       sexo: document.getElementById('editPetSexo').value,
       image: document.getElementById('editPetImage').value,
       description: document.getElementById('editPetDescription').value,
-      _id: Gpets[index].uid
+      _id: Gpets[index].uid,
+      _rev: Gpets[index].rev
     });
     console.log(updatePet);
     sendHTTPRequest(url, updatePet, HTTTPMethods.put, (res) => {
