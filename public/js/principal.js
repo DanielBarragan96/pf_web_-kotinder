@@ -10,6 +10,7 @@ let TOKEN = getTokenValue('token');
 let Guser;
 let GOtherpets;
 let currIndex = 0;
+let Gfavs;
 
 function getTokenValue(cname) {
     var name = cname + "=";
@@ -86,8 +87,19 @@ function loadOtherPets() {
         let pets = JSON.parse(res.data);
         GOtherpets = pets;
         petToHtml(GOtherpets[currIndex]);
+        loadFavs();
         return pets;
     }, (error) => {}, token);
+}
+
+async function loadFavs() {
+    let url = APIURL + `/favs/?id_user=${Guser.uid}`;
+    sendHTTPRequest(url, "", HTTTPMethods.get, (res) => {
+        let favs = JSON.parse(res.data);
+        Gfavs = favs;
+        return favs;
+    }, (error) => {}, token);
+
 }
 
 async function addUserData() {
@@ -108,5 +120,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     $('#btn_dislike').on('click', function (event) {
         currIndex = (currIndex + 1 >= GOtherpets.length) ? 0 : ++currIndex;
         petToHtml(GOtherpets[currIndex]);
+    });
+
+    $('#btn_superlike').on('click', function (event) {
+        let alreadyFav = false;
+        for (let fav of Gfavs) {
+            if (fav.id_pet == GOtherpets[currIndex].uid) {
+                alreadyFav = true;
+                break;
+            }
+        }
+        if (!alreadyFav) {
+            let url = APIURL + `/favs/`;
+            let body = JSON.stringify({
+                id_user: Guser.uid,
+                id_pet: GOtherpets[currIndex].uid
+            });
+            sendHTTPRequest(url, body, HTTTPMethods.post, (res) => {
+                let favs = JSON.parse(res.data);
+                alert('Pet saved to favorites!');
+                return favs;
+            }, (error) => {}, token);
+        } else {
+            alert('This pet is already on your favorites');
+        }
     });
 });

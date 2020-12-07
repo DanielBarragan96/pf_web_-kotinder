@@ -30,6 +30,11 @@ router.get('/', async (req, res) => {
     } else if (req.query.not_owner_id) {
         pets = pets.filter(pet => (pet.owner_id != req.query.not_owner_id));
     }
+
+    if (req.query.id_pet) {
+        pets = pets.filter(pet => (pet._id == req.query.id_pet));
+    }
+
     if (req.query.name) {
         let nom = (req.query.name) ? req.query.name : '';
         pets = pets.filter((ele, index, arr) => {
@@ -60,7 +65,8 @@ router.get('/', async (req, res) => {
             "sexo": val.sexo,
             "fecha": val.fecha,
             "uid": val._id,
-            "description": val.description
+            "description": val.description,
+            "rev": val._rev
         }
     });
     res.send(pets);

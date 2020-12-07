@@ -93,38 +93,19 @@
                   <span class="input-group-text" id="basic-addon1">
                     <i class="fas fa-bug"></i
                   ></span>
-                  <select class="custom-select" id="Sexo">
-                    <option value="1">Perro</option>
-                    <option value="2">Gato</option>
-                    <option value="3">Ave</option>
-                    <option value="4">Reptil</option>
-                    <option value="5">Roedor</option>
-                    <option value="6">Arácnido</option>
-                    <option value="7">Pez</option>
-                    <option value="8">Otro</option>
+                  <select class="custom-select" id="selectFavPets">
+                    <option value="0"></option>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Ave">Ave</option>
+                    <option value="Reptil">Reptil</option>
+                    <option value="Roedor">Roedor</option>
+                    <option value="Arácnido">Arácnido</option>
+                    <option value="Pez">Pez</option>
+                    <option value="Otro">Otro</option>
                   </select>
                 </div>
               </div>
-              <hr />
-              <div class="form-group">
-                <label for="distancia">Rango de distancia</label>
-                <input
-                  type="range"
-                  class="form-control-range"
-                  id="distancia"
-                  name="distancia"
-                  value="50"
-                  min="1"
-                  max="100"
-                />
-                <output
-                  for="distancia"
-                  onforminput="value = foo.valueAsNumber;"
-                ></output>
-              </div>
-              <hr />
-              <h6>Ubicación</h6>
-              <h6>Zapopan, Jalisco, México</h6>
             </form>
           </div>
         </td>
@@ -137,202 +118,46 @@
           <table class="tabla_favoritos">
             <tr>
               <td>
-                <button
+                <!-- <button
                   class="btn_fav"
                   data-toggle="modal"
                   data-target="#model4"
-                >
-                  <!-- Carta -->
-                  <div class="card_reduc">
-                    <!-- Carrusel mascotas -->
-                    <div class="carrusel_padre">
-                      <div
-                        id="carouselId"
-                        class="carousel slide"
-                        data-ride="carousel"
-                      >
-                        <ol class="carousel-indicators">
-                          <li
-                            data-target="#carouselId"
-                            data-slide-to="0"
-                            class="active"
-                          ></li>
-                          <li data-target="#carouselId" data-slide-to="1"></li>
-                          <li data-target="#carouselId" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="carousel-item active">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                > -->
+                <!-- Carta -->
+                <div class="card_reduc">
+                  <div
+                    id="carouselExampleControls"
+                    class="carousel slide"
+                    data-ride="carousel"
+                  >
+                    <div class="carousel-inner center" id="fav_carousel"></div>
+                    <a
+                      class="carousel-control-prev"
+                      href="#carouselExampleControls"
+                      role="button"
+                      data-slide="prev"
+                    >
+                      <span
+                        class="carousel-control-prev-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a
+                      class="carousel-control-next"
+                      href="#carouselExampleControls"
+                      role="button"
+                      data-slide="next"
+                    >
+                      <span
+                        class="carousel-control-next-icon"
+                        aria-hidden="true"
+                      ></span>
+                      <span class="sr-only">Next</span>
+                    </a>
                   </div>
-                </button>
-              </td>
-              <td>
-                <button
-                  class="btn_fav"
-                  data-toggle="modal"
-                  data-target="#model4"
-                >
-                  <!-- Carta -->
-                  <div class="card_reduc">
-                    <!-- Carrusel mascotas -->
-                    <div class="carrusel_padre">
-                      <div
-                        id="carouselId"
-                        class="carousel slide"
-                        data-ride="carousel"
-                      >
-                        <ol class="carousel-indicators">
-                          <li
-                            data-target="#carouselId"
-                            data-slide-to="0"
-                            class="active"
-                          ></li>
-                          <li data-target="#carouselId" data-slide-to="1"></li>
-                          <li data-target="#carouselId" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="carousel-item active">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button
-                  class="btn_fav"
-                  data-toggle="modal"
-                  data-target="#model4"
-                >
-                  <!-- Carta -->
-                  <div class="card_reduc">
-                    <!-- Carrusel mascotas -->
-                    <div class="carrusel_padre">
-                      <div
-                        id="carouselId"
-                        class="carousel slide"
-                        data-ride="carousel"
-                      >
-                        <ol class="carousel-indicators">
-                          <li
-                            data-target="#carouselId"
-                            data-slide-to="0"
-                            class="active"
-                          ></li>
-                          <li data-target="#carouselId" data-slide-to="1"></li>
-                          <li data-target="#carouselId" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="carousel-item active">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </button>
-              </td>
-              <td>
-                <button
-                  class="btn_fav"
-                  data-toggle="modal"
-                  data-target="#model4"
-                >
-                  <!-- Carta -->
-                  <div class="card_reduc">
-                    <!-- Carrusel mascotas -->
-                    <div class="carrusel_padre">
-                      <div
-                        id="carouselId"
-                        class="carousel slide"
-                        data-ride="carousel"
-                      >
-                        <ol class="carousel-indicators">
-                          <li
-                            data-target="#carouselId"
-                            data-slide-to="0"
-                            class="active"
-                          ></li>
-                          <li data-target="#carouselId" data-slide-to="1"></li>
-                          <li data-target="#carouselId" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner" role="listbox">
-                          <div class="carousel-item active">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                          <div class="carousel-item">
-                            <img
-                              class="imagen_carta"
-                              src="https://ximg.es/300.png/09f/fff"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </button>
+                </div>
+                <!-- </button> -->
               </td>
             </tr>
           </table>
@@ -343,7 +168,7 @@
     <!-- Modal 3 Mostrar Mascota -->
     <div
       class="modal fade"
-      id="model4"
+      id="modelFavMascota"
       tabindex="-1"
       role="dialog"
       aria-labelledby="modelTitleId"
@@ -430,5 +255,6 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="bootstrap.css" />
+    <script src="js/favoritos.js"></script>
   </body>
 </html>
